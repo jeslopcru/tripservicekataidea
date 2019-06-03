@@ -1,0 +1,18 @@
+# .gitignore
+# Includes IDEA IntellliJ project files
+# Includes Eclipse project files
+# Includes libraries
+#
+**/out/
+**/target/
+**/build/
+**/bin/
+
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/gradle.xml
+.idea/dictionaries
+*.iws
+
+.DS_Store
+desktop.ini
