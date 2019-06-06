@@ -23,14 +23,14 @@ public class TripServiceTest {
     @Test(expected = UserNotLoggedInException.class)
     public void should_throw_an_exception_when_user_is_not_logged() {
         TripService sut = new TestableTripService(null);
-        sut.getTripsByUser(null);
+        sut.getTripsByUser(null, null);
     }
 
     @Test
     public void should_return_any_trips_when_user_is_logged_and_are_not_friends() {
         User aUserNotFriend = new User();
 
-        List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriend);
+        List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriend, null);
 
         assertThat(tripsByUser.size(), is(0));
     }
@@ -40,7 +40,7 @@ public class TripServiceTest {
         User aUserNotFriendWithTrips = new User();
         aUserNotFriendWithTrips.addTrip(new Trip());
 
-        List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriendWithTrips);
+        List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriendWithTrips, null);
 
         assertThat(tripsByUser.size(), is(0));
     }
@@ -54,7 +54,7 @@ public class TripServiceTest {
         userWithTrips.addFriend(loggedUser);
         TripService sut = new TestableTripService(loggedUser);
 
-        List<Trip> tripsByUser = sut.getTripsByUser(userWithTrips);
+        List<Trip> tripsByUser = sut.getTripsByUser(userWithTrips, null);
 
         assertNotNull(tripsByUser);
     }
