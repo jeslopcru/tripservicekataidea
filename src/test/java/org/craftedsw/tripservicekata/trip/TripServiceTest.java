@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 /**
  * TODO LIST:
  * + No hay un usuario loggeado
- * - El usuario logeado y el objetivo son amigos
+ * + El usuario logeado y el objetivo son amigos
  * + El usuario logeado y el objetivo no son amigos
  * - El usuario logeado y el objetivo son amigo y el objetivo tiene viajes
  */
@@ -29,6 +29,16 @@ public class TripServiceTest {
         User aUserNotFriend = new User();
 
         List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriend);
+
+        assertThat(tripsByUser.size(), is(0));
+    }
+
+    @Test
+    public void should_return_trips_when_users_are_friends() {
+        User aUserNotFriendWithTrips = new User();
+        aUserNotFriendWithTrips.addTrip(new Trip());
+
+        List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriendWithTrips);
 
         assertThat(tripsByUser.size(), is(0));
     }
