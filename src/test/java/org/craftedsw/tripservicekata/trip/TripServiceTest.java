@@ -4,6 +4,7 @@ import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -69,6 +70,13 @@ public class TripServiceTest {
         @Override
         protected User obtainLoggedUser() {
             return this.loggedUserReturn;
+        }
+
+        @Override
+        protected List<Trip> findTripsBy(User user) {
+            List<Trip> fake = new LinkedList<>();
+            fake.add(new Trip());
+            return fake;
         }
     }
 }
