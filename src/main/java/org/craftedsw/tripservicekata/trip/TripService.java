@@ -10,11 +10,11 @@ import java.util.List;
 public class TripService {
 
     public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
-        List<Trip> tripList = new ArrayList<Trip>();
         User loggedUser = obtainLoggedUser();
         if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
+        List<Trip> tripList = new ArrayList<Trip>();
         if (user.isFriend(loggedUser)) {
             tripList = findTripsBy(user);
         }
