@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -41,6 +42,20 @@ public class TripServiceTest {
         List<Trip> tripsByUser = new TestableTripService(new User()).getTripsByUser(aUserNotFriendWithTrips);
 
         assertThat(tripsByUser.size(), is(0));
+    }
+
+
+    @Test
+    public void should_return_user_trip_list_when_logged_userWithTrips_and_user_are_friend() {
+        User loggedUser = new User();
+        User userWithTrips = new User();
+        userWithTrips.addTrip(new Trip());
+        userWithTrips.addFriend(loggedUser);
+        TripService sut = new TestableTripService(loggedUser);
+
+        List<Trip> tripsByUser = sut.getTripsByUser(userWithTrips);
+
+        assertNotNull(tripsByUser);
     }
 
     private class TestableTripService extends TripService {
