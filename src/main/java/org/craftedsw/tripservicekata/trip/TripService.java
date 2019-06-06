@@ -10,7 +10,7 @@ import java.util.List;
 public class TripService {
 
     public List<Trip> getTripsByUser(User user, User loggedInUser) throws UserNotLoggedInException {
-        User loggedUser = obtainLoggedUser();
+        User loggedUser = loggedInUser;
         if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }

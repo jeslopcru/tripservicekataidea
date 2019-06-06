@@ -71,11 +71,6 @@ public class TripServiceTest {
         }
 
         @Override
-        protected User obtainLoggedUser() {
-            return this.loggedUserReturn;
-        }
-
-        @Override
         protected List<Trip> findTripsBy(User user) {
             List<Trip> fake = new LinkedList<>();
             fake.add(new Trip());
