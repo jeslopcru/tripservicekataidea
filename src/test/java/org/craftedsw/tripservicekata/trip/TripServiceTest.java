@@ -22,7 +22,7 @@ public class TripServiceTest {
 
     @Test(expected = UserNotLoggedInException.class)
     public void should_throw_an_exception_when_user_is_not_logged() {
-        TripService sut = new TestableTripService(null);
+        TripService sut = new TestableTripService();
         sut.getTripsByUser(null, null);
     }
 
@@ -31,7 +31,7 @@ public class TripServiceTest {
         User aUserNotFriend = new User();
         User loggedInUser = new User();
 
-        List<Trip> tripsByUser = new TestableTripService(null).getTripsByUser(aUserNotFriend, loggedInUser);
+        List<Trip> tripsByUser = new TestableTripService().getTripsByUser(aUserNotFriend, loggedInUser);
 
         assertThat(tripsByUser.size(), is(0));
     }
@@ -43,7 +43,7 @@ public class TripServiceTest {
         User loggedInUser = new User();
 
 
-        List<Trip> tripsByUser = new TestableTripService(null).getTripsByUser(aUserNotFriendWithTrips, loggedInUser);
+        List<Trip> tripsByUser = new TestableTripService().getTripsByUser(aUserNotFriendWithTrips, loggedInUser);
 
         assertThat(tripsByUser.size(), is(0));
     }
@@ -55,7 +55,7 @@ public class TripServiceTest {
         User userWithTrips = new User();
         userWithTrips.addTrip(new Trip());
         userWithTrips.addFriend(loggedUser);
-        TripService sut = new TestableTripService(null);
+        TripService sut = new TestableTripService();
 
         List<Trip> tripsByUser = sut.getTripsByUser(userWithTrips, loggedUser);
 
@@ -63,12 +63,6 @@ public class TripServiceTest {
     }
 
     private class TestableTripService extends TripService {
-
-        private User loggedUserReturn;
-
-        public TestableTripService(User loggedUserReturn) {
-            this.loggedUserReturn = loggedUserReturn;
-        }
 
         @Override
         protected List<Trip> findTripsBy(User user) {
