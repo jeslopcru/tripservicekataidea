@@ -1,12 +1,14 @@
 package org.craftedsw.tripservicekata.trip;
 
+import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.junit.Test;
 
 public class TripServiceTest {
 
-    @Test
-    public void all_is_working() {
-        assert (true);
+    @Test(expected = UserNotLoggedInException.class)
+    public void should_throw_an_exception_when_user_is_not_logged() {
+        TripService sut = new TripService();
+        sut.getTripsByUser(null);
     }
 
 }
